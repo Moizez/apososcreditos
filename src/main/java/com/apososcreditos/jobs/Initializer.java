@@ -35,11 +35,7 @@ public class Initializer implements ApplicationListener<ContextRefreshedEvent> {
 			role.setName("ADMIN");
 			serviceRole.add(role);
 			/*usuario.getRole().add(role);
-			userService.createLinkAtivarConta(usuario); 
-			serviceUsuario.add(usuario);
-			Email email = new Email();
-			email.setTo(usuario.getEmail());
-			emailService.sendEmailBemVindo(email);*/
+			serviceUsuario.add(usuario);*/
 		}
 
 	}
