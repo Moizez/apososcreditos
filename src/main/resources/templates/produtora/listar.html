@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout-adm}">
+<head>
+<meta charset="UTF-8" />
+<title>Listagem de Produtora</title>
+</head>
+<body>
+
+		<div class="content-wrapper" layout:fragment="corpo">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			<strong>Produtora</strong>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-sm table-striped table-hover table-bordered">
+							<thead>
+								<tr class="text-center">
+									<th>ID</th>
+									<th>Nome</th>
+									<th>País</th>
+									<th>Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-center" th:each="produtora : ${produtoras}">
+									<td th:text="${produtora.id}"></td>
+									<td th:text="${produtora.nome}"></td>
+									<td th:text="${produtora.pais}"></td>
+									<td>
+										<div class="btn-group pull-right">
+									   		<a class="btn btn-sm btn-primary" th:href="@{/produtora/edit/{id}(id=${produtora.id})}" >Editar</a>
+									   		<a class="delete btn btn-sm btn-danger" style="margin-left: 5px" th:href="@{/produtora/delete/{id}(id=${produtora.id})}">Excluir</a>
+									   </div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<a class="btn btn-sm btn-success" th:href="@{/produtora/add}" >Adicionar Nova</a>
+				</div>
+
+			</div>
+		</div>
+	
+</body>
+</html>

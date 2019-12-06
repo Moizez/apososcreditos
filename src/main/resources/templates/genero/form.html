@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout-adm}">
+<head>
+<meta charset="UTF-8" />
+<title>Cadastro de Gênero</title>
+</head>
+<body>
+		<div class="content-wrapper" layout:fragment="corpo">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Cadastro de Gêneros</strong>
+				</div>
+			<form class="container" method="post" th:object="${genero}"
+				th:action="@{/genero/save}">
+
+				<!--Input responsável em guardar o id-->
+				<input id="id" name="id" type="hidden" th:field="*{id}"
+					th:value="*{id}">
+
+				<!-- div reponsável em mostrar os erros -->
+				<div class="form-group row">
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert" th:if="${#fields.hasAnyErrors()}">
+
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+
+						<div th:each="detailedError : ${#fields.detailedErrors()}">
+							<strong th:text="${detailedError.message}"> </strong>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+					    <label>Nome</label>
+					    <input type="text" class="form-control input-sm" th:field="*{nome}" autofocus="autofocus" placeholder="Informe o Nome" maxlength="150"/>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('info')}? 'has-error'">
+					    <label for="textarea">Informação</label>
+					    <textarea type="text" class="form-control input-sm" th:field="*{info}" autofocus="autofocus"  rows="10" maxlength="3000"></textarea>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<button type="submit" class="btn btn-m btn-primary">Cadastrar</button>
+					<a th:href="@{/genero/listar}" style="margin-left: 5px" class="btn btn-m btn-danger">Cancelar</a>
+				</div>
+
+			</form>
+
+		</div>
+		</div>
+	
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout-adm}">
+<head>
+<meta charset="UTF-8" />
+<title>Cadastro de Filme</title>
+
+</head>
+<body>
+		<div class="content-wrapper" layout:fragment="corpo">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Cadastro de Filmes</strong>
+				</div>
+				
+			<div th:replace="fragmentos/alert"></div>
+				
+			<form enctype= "multipart/form-data" class="container" method="post" th:object="${filme}"
+				th:action="@{/filme/save}">
+
+				<!--Input responsável em guardar o id-->
+				<input id="id" name="id" type="hidden" th:field="*{id}"
+					th:value="*{id}">
+
+				<!-- div reponsável em mostrar os erros -->
+				<div class="form-group row">
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert" th:if="${#fields.hasAnyErrors()}">
+
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+
+						<div th:each="detailedError : ${#fields.detailedErrors()}">
+							<strong th:text="${detailedError.message}"> </strong>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group row col-md-4">
+					<select th:field="*{diretor}" class="form-control">
+						<option selected value="-1">Selecione um Diretor</option>
+						<option th:each="diretor : ${diretores}"
+							th:value="${diretor.id}" th:text="${diretor.nome}"></option>
+					</select>
+				</div>
+				 
+				<div class="form-group row col-md-4">
+					<select th:field="*{produtora}" class="form-control">
+						<option selected value="-1">Selecione uma Produtora</option>
+						<option th:each="produtora : ${produtoras}"
+							th:value="${produtora.id}" th:text="${produtora.nome}"></option>
+					</select>
+				</div>
+				
+				<div class="form-group row col-md-4">
+					<select th:field="*{genero}" class="form-control">
+						<option selected value="-1">Selecione um Genero</option>
+						<option th:each="genero : ${generos}"
+							th:value="${genero.id}" th:text="${genero.nome}"></option>
+					</select>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('titulo')}? 'has-error'">
+					    <label>Titulo</label>
+					    <input type="text" class="form-control input-sm" th:field="*{titulo}" autofocus="autofocus"  maxlength="150"/>
+					</div>
+				</div>
+				
+				
+				<div class="custom-file col-md-4" th:classappend="${#fields.hasErrors('imagem')}? 'has-error'">
+					<input type="file" class="custom-file-input" id="customFile" name="file"/>
+    				
+    				<label class="custom-file-label" for="customFile">Escolha o pôster</label>
+  				</div>
+  				<p></p>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-5" th:classappend="${#fields.hasErrors('sinopse')}? 'has-error'">
+					    <label for="textarea">Sinopse</label>
+					    <textarea type="text" class="form-control input-sm" th:field="*{sinopse}" autofocus="autofocus"  rows="5" maxlength="3500"></textarea>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-5" th:classappend="${#fields.hasErrors('critica')}? 'has-error'">
+					    <label for="textarea">Crítica</label>
+					    <textarea type="text" class="form-control input-sm" th:field="*{critica}" autofocus="autofocus"  rows="5" maxlength="3500"></textarea>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-5" th:classappend="${#fields.hasErrors('curiosidade')}? 'has-error'">
+					    <label for="textarea">Curiosidades</label>
+					    <textarea type="text" class="form-control input-sm" th:field="*{curiosidade}" autofocus="autofocus"  rows="5" maxlength="3500"></textarea>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('pais')}? 'has-error'">
+					    <label>País de Origem</label>
+					    <input type="text" class="form-control input-sm" th:field="*{pais}" autofocus="autofocus"  maxlength="150"/>
+					</div>
+				</div>
+				
+				 <div class="form-group row col-md-4">
+	                        <label for="ano">Ano de Lançamento</label>
+	                        <input type="date" class="form-control" id="ano" th:field="*{ano}"
+	                        	   th:classappend="${#fields.hasErrors('ano')} ? 'is-invalid'" />
+	                        <div class="invalid-feedback">
+								<span th:errors="*{ano}"></span>
+	                        </div>
+	            </div>
+				
+				<div class="form-group row">
+					<button type="submit" class="btn btn-m btn-primary">Cadastrar</button>
+					<a th:href="@{/filme/listar}" style="margin-left: 5px" class="btn btn-m btn-danger">Cancelar</a>
+				</div>
+
+			</form>
+
+		</div>
+		</div>
+		
+		<script>
+		// Add the following code if you want the name of the file appear on select
+		$(".custom-file-input").on("change", function() {
+  		var fileName = $(this).val().split("\\").pop();
+  		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+		});
+		</script>	
+</body>
+</html>

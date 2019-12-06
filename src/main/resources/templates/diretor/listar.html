@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout-adm}">
+<head>
+<meta charset="UTF-8" />
+<title>Listagem de Diretores</title>
+</head>
+<body>
+		<div class="content-wrapper" layout:fragment="corpo">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			<strong>Diretores</strong>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-sm  table-striped table-hover table-bordered">
+							<thead>
+								<tr class="text-center">
+									<th>ID</th>
+									<th>Foto</th>
+									<th>Nome</th>
+									<th>Data de Nascimento</th>
+									<th>País de Origem</th>
+									<th>Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-center" th:each="diretor : ${diretores}">
+									<td th:text="${diretor.id}"></td>
+									<td><img height="150px" width="120px" th:src="@{/diretor/imagem/{id}(id=${diretor.id})}"/></td>
+									<td th:text="${diretor.nome}"></td>
+									<td th:text="${diretor.dataNascimento}"></td>
+									<td th:text="${diretor.pais}"></td>
+									<td>
+										<div class="btn-group pull-right">
+									   		<a class="btn btn-sm btn-primary" th:href="@{/diretor/edit/{id}(id=${diretor.id})}" >Editar</a>
+									   		<a class="delete btn btn-sm btn-danger" style="margin-left: 5px" th:href="@{/diretor/delete/{id}(id=${diretor.id})}">Excluir</a>
+									   </div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<a class="btn btn-sm btn-success" th:href="@{/diretor/add}" >Adicionar Novo</a>
+				</div>
+
+			</div>
+		</div>
+	
+</body>
+</html>

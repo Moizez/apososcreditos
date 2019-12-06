@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout-adm}">
+<head>
+<meta charset="UTF-8" />
+<title>Listagem de Gênero</title>
+</head>
+<body>
+
+		<div class="content-wrapper" layout:fragment="corpo">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			<strong>Gêneros</strong>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-sm table-striped table-hover table-bordered">
+							<thead>
+								<tr class="text-center">
+									<th>ID</th>
+									<th>Nome</th>
+									<th>Info</th>
+									<th>Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-center" th:each="genero : ${generos}">
+									<td th:text="${genero.id}"></td>
+									<td th:text="${genero.nome}"></td>
+									<td>
+		                            	<button type="button" class="btn btn-secondary btn-sm" data-container="body"
+		                                    data-toggle="popover" data-placement="top" th:attr="data-content=${#strings.concat(
+			                                    genero.info, ', ',
+		                                    )}">
+		                                    <span class="fa fa-eye" title="Visualizar" aria-hidden="true"></span>		                                
+		                                	
+		                            	</button>
+		                        	</td>
+									<td>
+										<div class="btn-group pull-right">
+									   		<a class="btn btn-sm btn-primary" th:href="@{/genero/edit/{id}(id=${genero.id})}" >Editar</a>
+									   		<a class="delete btn btn-sm btn-danger" style="margin-left: 5px" th:href="@{/genero/delete/{id}(id=${genero.id})}">Excluir</a>
+									   </div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<a class="btn btn-sm btn-success" th:href="@{/genero/add}" >Adicionar Novo</a>
+				</div>
+
+			</div>
+		</div>
+	
+</body>
+</html>

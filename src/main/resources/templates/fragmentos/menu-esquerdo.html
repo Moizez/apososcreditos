@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+</head>
+
+<body>
+
+	<div th:fragment="menu-esquerdo">
+		<ul	class="navbar-nav bg-dark sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+
+			<!-- Menu esquerdo -->
+			<a class="sidebar-brand d-flex align-items-center justify-content-center"
+				th:href="@{http://localhost:8080/adm}">
+				<div>
+					<i class="fas fa-fw fa-book"></i>
+				</div>				
+				<div class="sidebar-brand-text mx-3">MOVIE STORE</div>				
+			</a>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
+
+			<!-- Nav Item - Dashboard -->
+			<li class="nav-item active"><a class="nav-link"
+				href="#"> <i class="fas fa-fw fa-user"></i> <span class="profile-text" sec:authentication="name"></span>
+			</a></li>
+
+		<div>
+			<!-- Heading
+		<div sec:authorize="hasAuthority('ADM')" > -->
+		
+			<!-- Divider -->
+			<hr class="sidebar-divider">
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseTwo"
+				aria-expanded="false" aria-controls="collapseTwo"> <i
+					class="fas fa-fw fa-clipboard"></i> <span>Cadastrar</span></a>
+					
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/filme/add}">Filme</a>
+						<a class="collapse-item" th:href="@{/diretor/add}">Diretor</a>
+						<a class="collapse-item" th:href="@{/genero/add}">Gênero</a>
+						<a class="collapse-item" th:href="@{/produtora/add}">Produtora</a>
+					</div>
+				</div>
+			</li>
+
+			<!-- Nav Item - Utilities Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseUtilities"
+				aria-expanded="true" aria-controls="collapseUtilities"> <i
+					class="fas fa-fw fa-search"></i> <span>Consultar</span></a>
+					
+				<div id="collapseUtilities" class="collapse"
+					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/filme/listar}">Filme</a>
+						<a class="collapse-item" th:href="@{/diretor/listar}">Diretor</a>
+						<a class="collapse-item" th:href="@{/genero/listar}">Gênero</a>
+						<a class="collapse-item" th:href="@{/produtora/listar}">Produtora</a>
+						<a class="collapse-item" th:href="@{commentary/listar_adm}">Comentários</a>
+					</div>
+				</div>
+			</li>
+			<!-- Divider -->
+		</div>
+		
+			<hr class="sidebar-divider">
+			<div class="sidebar-heading">Configurações</div>
+			
+			<li class="nav-item"><a class="nav-link collapsed" th:href="@{/logout}"
+				 data-target="#collapseSair"
+				aria-expanded="false" aria-controls="collapseSair">
+				 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Sair</a>
+					
+			</li>
+
+			<hr class="sidebar-divider">
+
+			<!-- Nav Item - Pages Collapse Menu -->
+		</ul>
+	</div>
+
+	
+</body>
+</html>

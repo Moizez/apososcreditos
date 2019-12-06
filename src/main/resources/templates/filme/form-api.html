@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout-adm}">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Filmes - API</title>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="corpo">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Cadastro de Filmes</strong>
+        </div>
+
+        <div th:replace="fragmentos/alert"></div>
+
+        <form enctype= "multipart/form-data" class="container" method="post" th:object="${filme}"
+              th:action="@{/filme/save}">
+
+            <!--Input responsável em guardar o id-->
+            <input id="id" name="id" type="hidden" th:field="*{id}"
+                   th:value="*{id}">
+
+            <!-- div reponsável em mostrar os erros -->
+            <div class="form-group row">
+                <div class="alert alert-danger alert-dismissible fade show"
+                     role="alert" th:if="${#fields.hasAnyErrors()}">
+
+                    <button type="button" class="close" data-dismiss="alert"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                    <div th:each="detailedError : ${#fields.detailedErrors()}">
+                        <strong th:text="${detailedError.message}"> </strong>
+                    </div>
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show"
+                     role="alert" id="div">
+
+                    <button type="button" class="close" data-dismiss="alert"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                    <div id="alert-notFound">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-4" th:classappend="${#fields.hasErrors('titulo')}? 'has-error'">
+                    <label>Busca</label>
+                    <input type="text" id="search" class="form-control input-sm" autofocus="autofocus"  maxlength="150"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-4" th:classappend="${#fields.hasErrors('titulo')}? 'has-error'">
+                    <label>Titulo</label>
+                    <input type="text" id="title" class="form-control input-sm" th:field="*{titulo}" autofocus="autofocus"  maxlength="150"/>
+                </div>
+            </div>
+
+            <div class="custom-file col-md-4" th:classappend="${#fields.hasErrors('imagem')}? 'has-error'">
+            	<br/>
+            	<br/>
+            	<input type="file" class="custom-file-input" id="customFile" name="file"/>
+                <label class="custom-file-label" for="customFile">O pôster</label>
+                <div id="poster">
+
+                </div>
+                <br/>
+                <br/>
+            	</div>
+            	
+            <div class="form-group row">
+                <div class="col-md-4" >
+                    <label>Diretor</label>
+                    <input type="text" id="diretor" class="form-control input-sm" name="diretorApi" autofocus="autofocus"  maxlength="150"/>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label>Gênero</label>
+                    <input type="text" id="genero" class="form-control input-sm" name="genero" autofocus="autofocus"  maxlength="150"/>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-md-4" th:classappend="${#fields.hasErrors('elenco')}? 'has-error'">
+                    <label>Elenco</label>
+                    <input type="text" id="elenco" class="form-control input-sm" th:field="*{elenco}" autofocus="autofocus"  maxlength="150"/>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label>Produtora</label>
+                    <input type="text" id="produtora" class="form-control input-sm" name="produtoraApi" autofocus="autofocus"  maxlength="150"/>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-md-4" th:classappend="${#fields.hasErrors('duracao')}? 'has-error'">
+                    <label>Duração</label>
+                    <input type="text" id="duracao" class="form-control input-sm" th:field="*{duracao}" autofocus="autofocus"  maxlength="150"/>
+                </div>
+            </div>
+            
+
+            <div class="form-group row">
+                <div class="col-md-5" th:classappend="${#fields.hasErrors('sinopse')}? 'has-error'">
+                    <label for="textarea">Sinopse</label>
+                    <textarea id="sinopse" type="text" class="form-control input-sm" th:field="*{sinopse}" autofocus="autofocus"  rows="5" maxlength="3500"></textarea>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-md-5" th:classappend="${#fields.hasErrors('critica')}? 'has-error'">
+                    <label for="textarea">Crítica</label>
+                    <textarea id="critica" type="text" class="form-control input-sm" th:field="*{critica}" autofocus="autofocus"  rows="5" maxlength="3500"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-5" th:classappend="${#fields.hasErrors('curiosidade')}? 'has-error'">
+                    <label for="textarea">Curiosidades</label>
+                    <textarea id="curiosidade" type="text" class="form-control input-sm" th:field="*{curiosidade}" autofocus="autofocus"  rows="5" maxlength="3500"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-4" th:classappend="${#fields.hasErrors('pais')}? 'has-error'">
+                    <label>País de Origem</label>
+                    <input id="pais" type="text" class="form-control input-sm" th:field="*{pais}" autofocus="autofocus"  maxlength="150"/>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-md-4" th:classappend="${#fields.hasErrors('ano')}? 'has-error'">
+                    <label>Ano de Lançamento</label>
+                    <input id="ano" type="text" class="form-control input-sm" th:field="*{ano}" autofocus="autofocus"  maxlength="150"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <button type="submit" class="btn btn-m btn-primary">Cadastrar</button>
+                <a th:href="@{/filme/listar}" style="margin-left: 5px" class="btn btn-m btn-danger">Cancelar</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+</body>
+</html>

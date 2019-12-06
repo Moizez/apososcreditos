@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/layout-home}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<link th:href="@{/css/comments.css}" rel='stylesheet' type='text/css' />
+	
+</head>
+	<body>
+
+	<div class="container-corpo" layout:fragment="corpo-home">
+		<!----product-details--->
+				<div class="product-details">
+					<div class="container">
+					<div class="product-details-row1">
+						<div class="product-details-row1-head">
+							<div><h2 th:text="${filme.titulo}" ></h2></div>
+						</div>
+						<div class="col-md-4 product-details-row1-col1">
+
+						<!----//details-product-slider--->
+						<div class="details-left" style="margin-bottom: 1em;">
+							<div class="details-left-slider">
+								<span id="etalage">
+									<img class="etalage_thumb_image" height="510px" width="350px" th:src="@{/filme/imagem/{id}(id=${filme.id})}"/>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 product-details-row1-col2">
+
+						<div class="product-price">
+							<div class="product-price-left">
+								<span>SINOPSE</span>
+							</div>
+
+							<div class="clearfix"> </div>
+						</div>
+						<div class="product-price-details">
+							<div th:text="${filme.sinopse}" ></div>	
+							
+							<div class="product-price-details-info">
+								<label><b>Diretor:</b></label> <div th:text="${filme.diretor.nome}" ></div>
+								<label><b>Gênero:</b></label>
+								<th:block th:each="genero : ${filme.generos}">
+									<thead th:text="${genero.nome}"></thead>
+								</th:block></br>
+								<label><b>País de Origem:</b></label> <div th:text="${filme.pais}" ></div>
+								<label><b>Elenco:</b></label> <div th:text="${filme.elenco}" ></div>
+								<label><b>Produtora:</b></label> <div th:text="${filme.produtora.nome}" ></div>
+								<label><b>Duração:</b></label> <div th:text="${filme.duracao}" ></div>
+							</div>
+
+							<div class="clearfix"> </div>
+
+							<div class="product-cart-share">
+								<ul class="product-share text-right">
+									<h3>COMPARTILHE:</h3>
+									<ul>
+										<li><a class="share-face" href="#"><span> </span> </a></li>
+										<li><a class="share-twitter" href="#"><span> </span> </a></li>
+										<li><a class="share-google" href="#"><span> </span> </a></li>
+										<li><a class="share-rss" href="#"><span> </span> </a></li>
+										<div class="clear"> </div>
+									</ul>
+								</ul>
+							</div>
+						</div>
+					</div>
+						<div class="clearfix"> </div>
+				<!--//product-details--->
+				</div>
+				<!---- product-details ---->
+				<div class="product-tabs">
+					<!--Horizontal Tab-->
+				    <div id="horizontalTab">
+				        <ul>
+				            <li><a href="#tab-1">CRÍTICA</a></li>
+				            <li><a href="#tab-2">EXTRAS</a></li>
+				      	</ul>
+				        <div id="tab-1" class="product-complete-info">
+				       		<span>O QUE ACHEI?</span>
+				       		<div class="product-fea">
+								<div><p th:text="${filme.critica}"></div>
+				       		</div>
+				        </div>
+				        <div id="tab-2" class="product-complete-info">
+				        	<h3>BASTIDORES:</h3>
+				        	<div><p th:text="${filme.curiosidade}"></div>
+				       	</div>
+
+				    </div>
+
+				</div>
+				<!-- //product-details ---->
+				
+				<div class="product-tabs" style="padding-top: 30px; padding-bottom: 30px;">
+					<!--Horizontal Tab-->
+				    <div id="horizontalTab">
+				        
+				    <form enctype="multipart/form-data" class="product-tabs" method="post" th:object="${commentary}" 
+				    th:action="@{/commentary/save}">
+				     
+					    <!--Input responsável em guardar o id-->
+					    <input id="id" name="id" type="hidden" th:field="*{id}"
+	                   	th:value="*{id}">
+				     
+				        <th:block th:if="${success != null}">
+							<div class="alert alert-success">
+								<span th:text="${success}"></span>
+							</div>
+						</th:block>
+							<th:block th:if="${error != null}">
+							<div class="alert alert-danger">
+								<span th:text="${error}"></span>
+						</div>
+						</th:block>
+				        
+				        <div id="tab-1" class="product-complete-info">
+				       		<h3>DEIXE AQUI SEU COMENTÁRIO (É NECESSÁRIO ESTAR LOGADO):</h3>
+				       		<div class="product-fea">
+				       			<input type="hidden" th:value="${filme.id}" name="idFilme"/>
+				       			<textarea id="commentary" th:field="*{commentaryText}" type="text" class="form-control input-sm" autofocus="autofocus"  rows="5" maxlength="300"></textarea>
+				       			<button type="submit" class="btn btn-m btn-primary" style="padding-top: 8px;">Publicar</button>
+				       		</div>
+				       		
+				       		<div>
+				       		
+				       		<div th:each="commentary : ${commentars}" class="row" style="padding-top: 30px; padding-bottom: 30px">
+								<div class="col-sm-1">
+								<div class="thumbnail">
+								<img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+								</div><!-- /thumbnail -->
+								</div><!-- /col-sm-1 -->
+								
+								<div class="col-sm-5">
+								<div class="panel panel-default">
+								<div class="panel-heading">
+								<strong th:text="${commentary.userInfo.firstName}"></strong> <span class="text-muted" th:text="${commentary.data}"></span>
+								</div>
+								<div class="panel-body">
+								<label></label> <div th:text="${commentary.commentaryText}" ></div>
+								</div><!-- /panel-body -->
+								</div><!-- /panel panel-default -->
+								</div><!-- /col-sm-5 -->
+
+
+							</div><!-- /row -->
+				       			
+				       		</div>
+				        </div>
+				        
+				        </form>
+				      
+				    </div>
+
+				</div>
+				
+				
+				</div>
+				</div>
+			<!----content---->
+			<div class="clearfix"> </div>
+			
+		<!----sessão de comentários---->
+		
+		
+			</div>
+		<!----container---->
+	</body>
+</html>
+
+

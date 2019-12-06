@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"></head>
+<body>
+
+			<!---top-header-nav---->
+			<div class="top-header-nav" th:fragment="cabecalho-nav">
+			<!----start-top-nav---->
+			 <nav class="top-nav main-menu">
+					<ul class="top-nav">
+						<li><a th:href="@{/}">CRÍTICAS </a><span> </span></li>
+						<li><a th:href="@{/}">GRANDES DIRETORES</a><span> </span></li>
+						<li><a th:href="@{/}">HISTÓRIA DO CINEMA</a><span> </span></li>
+						<li><a th:href="@{/}">CURIOSIDADES</a></li>
+						<div class="clearfix"> </div>
+					</ul>
+					<a href="#" id="pull"><img th:src="@{/images/nav-icon.png}" title="menu" /></a>
+			  </nav>
+			  <!----End-top-nav---->
+			  <!---top-header-search-box--->
+			  <div class="top-header-search-box">
+			  	<form class="form-inline" method="GET" th:action="@{/filme/buscar/titulo}">
+			  		<input type="text" placeholder="Buscar filmes" required maxlength="22" th:name="titulo">
+			  		<input type="submit" value=" " >
+			  	</form>
+			  </div>
+			  <!---top-header-search-box--->
+						<div class="clearfix"> </div>
+			</div>
+
+</body>
+</html>

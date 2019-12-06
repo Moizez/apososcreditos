@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/layout-home}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8" /></head>
+
+	<body>
+	
+		<!----container---->
+				
+				<div class="container"  layout:fragment="corpo-home">
+				<!----special-products---->
+				<div class="special-products">
+					<div class="s-products-head">
+						<div class="s-products-head-left">
+							<h3>ÚLTIMAS <span> CRÍTICAS</span></h3>
+						</div>
+						<div class="s-products-head-right">
+							<a href="products.html"><span> </span>ver todas as críticas</a>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<!----special-products-grids---->
+					<div class="special-products-grids">
+						<th:block th:each="filme : ${filmes}">
+						<div class="col-md-3 special-products-grid text-center">
+							<a class="product-here" th:href="@{/filme/single-page/{id}(id=${filme.id})}"><img th:src="@{/filme/imagem/{id}(id=${filme.id})}" width="200" height="250" alt="" /></a>
+							<h4><a class="brand-name" th:href="@{/filme/details/{id}(id=${filme.id})}"><b><p th:text="${filme.titulo}"></p></b></a></h4>
+						</div>
+
+						</th:block>
+						<div class="clearfix"> </div>
+					</div>
+					<!---//special-products-grids---->
+				</div>
+				<!---//speical-products---->
+				</div>
+		<!----container---->
+		
+			
+	</body>
+</html>
+

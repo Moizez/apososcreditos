@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout-adm}">
+<head>
+<meta charset="UTF-8" />
+<title>Listagem dos Comentários</title>
+</head>
+<body>
+
+		<div class="content-wrapper" layout:fragment="corpo">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			<strong>Comentários</strong>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-sm table-striped table-hover table-bordered">
+							<thead>
+								<tr class="text-center">
+									<th>ID</th>
+									<th>Usuário</th>
+									<th>Comentário</th>
+									<th>Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-center" th:each="commentary : ${commentaries}">
+									<td th:text="${commentary.id}"></td>
+									<td th:text="${commentary.userInfo.firstName}"></td>									
+									<td>
+		                            	<button type="button" class="btn btn-secondary btn-sm" data-container="body"
+		                                    data-toggle="popover" data-placement="top" th:attr="data-content=${#strings.concat(
+			                                    commentary.commentaryText, ', ',
+		                                    )}">
+		                                    <span class="fa fa-eye" title="Visualizar" aria-hidden="true"></span>		                                
+		                                	
+		                            	</button>
+		                        	</td>
+									<td>
+										<div class="btn-group pull-right">
+									   		<a class="delete btn btn-sm btn-danger" style="margin-left: 5px" th:href="@{/commentary/delete/{id}(id=${commentary.id})}">Excluir</a>
+									   </div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	
+</body>
+</html>

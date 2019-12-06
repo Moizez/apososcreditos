@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"></head>
+<body>
+
+			<!----top-header---->
+			<div class="top-header" th:fragment="cabecalho">
+				<div class="logo">
+					<a th:href="@{/}"><img th:src="@{/images/logo.png}" title="apososcreditos" /></a>
+				</div>
+				<div class="top-header-info">
+					<div class="top-contact-info">
+						<ul class="unstyled-list list-inline">
+							<div class="clearfix"> </div>
+						</ul>
+					</div>					
+					<div class="top-contact-info">
+						<ul class="unstyled-list list-inline">
+							<li><span class="mail"></span><a href="#">apososcreditos@gmail.com</a></li>
+							<div class="clearfix"> </div>
+						</ul>
+					</div>
+					
+					<div class="cart-details">
+						<div class="login-rigister">
+							<ul class="unstyled-list list-inline">
+								<li>
+					                <div class="inset">
+					                </div>
+              					</li>
+              					<li><span class="mail"></span><p sec:authentication="name" sec:authorize="isAuthenticated()"></p></li>
+								<li><a class="rigister" th:href="@{/login}" sec:authorize="!isAuthenticated()">LOGIN</a></li>
+								<li><a class="rigister" th:href="@{/logout}" sec:authorize="isAuthenticated()">LOGOUT</a></li>
+								<div class="clearfix"></div>
+							</ul>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<!----//top-header---->
+			<!---top-header-nav---->
+			
+</body>
+</html>
