@@ -24,7 +24,7 @@ public class LinkedinServiceImpl implements LinkedinService {
 	@Override
 	public String linkedinlogin() {
 		OAuth2Parameters parameters = new OAuth2Parameters();
-		parameters.setRedirectUri("http://localhost:8080/linkedin");
+		parameters.setRedirectUri("http://localhost:3000/linkedin");
 		parameters.setScope("r_basicprofile, r_emailaddress");
 
 		return createLinkedInConnection().getOAuthOperations().buildAuthenticateUrl(parameters);
@@ -32,7 +32,7 @@ public class LinkedinServiceImpl implements LinkedinService {
 
 	@Override
 	public String getLinkedInAccessToken(String code) {
-		return createLinkedInConnection().getOAuthOperations().exchangeForAccess(code, "http://localhost:8080/linkedin", null).getAccessToken();
+		return createLinkedInConnection().getOAuthOperations().exchangeForAccess(code, "http://localhost:3000/linkedin", null).getAccessToken();
 	}
 
 	@Override
