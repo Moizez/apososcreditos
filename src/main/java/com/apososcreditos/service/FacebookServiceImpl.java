@@ -24,7 +24,7 @@ public class FacebookServiceImpl implements FacebookService{
 	@Override
 	public String facebooklogin() {
 		OAuth2Parameters parameters = new OAuth2Parameters();
-		parameters.setRedirectUri("http://localhost:3000/facebook");
+		parameters.setRedirectUri("http://localhost:8080/facebook");
 		parameters.setScope("public_profile, email");
 		
 		return createFacebookConnection().getOAuthOperations().buildAuthenticateUrl(parameters);
@@ -32,7 +32,7 @@ public class FacebookServiceImpl implements FacebookService{
 
 	@Override
 	public String getFacebookAccessToken(String code) {
-		return createFacebookConnection().getOAuthOperations().exchangeForAccess(code, "http://localhost:3000/facebook", null).getAccessToken();
+		return createFacebookConnection().getOAuthOperations().exchangeForAccess(code, "http://localhost:8080/facebook", null).getAccessToken();
 	}
 
 	@Override
