@@ -16,6 +16,9 @@ public class LinkedinServiceImpl implements LinkedinService {
 
 	@Value("${spring.social.linkedin.app-secret}")
 	private String linkedinSecret;
+	
+	@Value("${spring.social.linkedin.app-scope}")
+	private String linkedinScope;
 
 	private LinkedInConnectionFactory createLinkedInConnection() {
 		return new LinkedInConnectionFactory(linkedinId, linkedinSecret);

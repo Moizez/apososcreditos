@@ -17,6 +17,9 @@ public class GoogleServiceImpl implements GoogleService{
 	@Value("${spring.social.google.app-secret}")
 	private String googleSecret;
 	
+	@Value("${spring.social.google.app-scope}")
+	private String googleScope;
+	
 	private GoogleConnectionFactory createGoogleConnection () {
 		return new GoogleConnectionFactory(googleId, googleSecret);
 	}
