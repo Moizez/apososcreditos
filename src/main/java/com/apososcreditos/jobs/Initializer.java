@@ -5,16 +5,15 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import com.apososcreditos.model.Role;
 import com.apososcreditos.model.UserInfo;
-import com.apososcreditos.service.RoleService;
+import com.apososcreditos.service.UserService;
 
 @Component
 public class Initializer implements ApplicationListener<ContextRefreshedEvent> {
-	
+
 	@Autowired
-	private RoleService serviceRole;
-	
+	private UserService userService;
+
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		System.out.println("----- Criando Usuário ------");
@@ -24,18 +23,17 @@ public class Initializer implements ApplicationListener<ContextRefreshedEvent> {
 	}
 
 	private void createUserAdmin() {
-		UserInfo usuario = new UserInfo();
-		usuario.setFirstName("Moisés");
-		usuario.setLastName("Henrique");
-		usuario.setEmail("moizez@gmail.com");
-		usuario.setPassword("123");
-		Role role = serviceRole.getNome("ADMIN");
-		if(role == null) {
-			role = new Role();
-			role.setName("ADMIN");
-			serviceRole.add(role);
-			/*usuario.getRole().add(role);
-			serviceUsuario.add(usuario);*/
+		UserInfo usuario = userService.findByRoleAdmin();
+
+		if (usuario == null) {
+			usuario = new UserInfo();
+			usuario.setFirstName("Moisés");
+			usuario.setLastName("Henrique");
+			usuario.setEmail("moizez@gmail.com");
+			usuario.setPassword("123");
+			usuario.setRole("ADMIN");
+			userService.save(usuario);
+
 		}
 
 	}

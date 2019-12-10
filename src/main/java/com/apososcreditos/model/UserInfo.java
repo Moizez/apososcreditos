@@ -119,7 +119,7 @@ public class UserInfo implements Serializable {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
 	public List<Commentary> getCommentaries() {
 		return commentaries;
 	}

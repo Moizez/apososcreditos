@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findById(id).get();
 	}
 
+	@Override
+	public UserInfo findByRoleAdmin() {
+		return userRepository.findByRoleAdmin();
+	}
+
 }
