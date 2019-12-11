@@ -58,14 +58,17 @@ public class Filme implements Serializable {
 
 	@OneToMany(mappedBy = "filme")
 	private List<Commentary> commentaries;
+
 	@ManyToOne
-	@JoinColumn(name="diretor_id")
+	@JoinColumn(name = "diretor_id")
 	private Diretor diretor;
+
 	@ManyToMany
-	@JoinTable(name="filme_genero")
+	@JoinTable(name = "filme_genero")
 	private List<Genero> generos = new ArrayList<Genero>();
+
 	@ManyToOne
-	@JoinColumn(name="produtora_id")
+	@JoinColumn(name = "produtora_id")
 	private Produtora produtora;
 
 	public Long getId() {

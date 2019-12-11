@@ -18,7 +18,7 @@ public class Initializer implements ApplicationListener<ContextRefreshedEvent> {
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		System.out.println("----- Criando Usuário ------");
 		createUserAdmin();
-		// createUsuario();
+
 		System.out.println("----- Usuário Criado com Sucesso! -----");
 	}
 
