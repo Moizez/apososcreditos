@@ -59,7 +59,7 @@ public class CommentaryController {
 			commentaryService.save(commentary);
 
 			return new ModelAndView("filme/single-page").addObject("filme", filme)
-					.addObject("success", "Comentário realizado!").addObject("commentary", new Commentary())
+					.addObject("success", "Comentário realizado com sucesso!").addObject("commentary", new Commentary())
 					.addObject("commentars", commentaryService.findByCommentarsLinkedFilme(filme.getId()));
 		}
 
@@ -78,7 +78,7 @@ public class CommentaryController {
 
 		return mv;
 	}
-	
+
 	@GetMapping("/listar_adm")
 	public ModelAndView findAllAdm() {
 
